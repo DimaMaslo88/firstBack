@@ -4,10 +4,7 @@ import {itemsRouter} from "./routes/itemsRouter";
 
 
 
-
-
-
-const PORT =  6000;
+const PORT =  5000;
 const app = express()
 
 

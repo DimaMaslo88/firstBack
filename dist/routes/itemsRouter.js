@@ -1,13 +1,16 @@
-import { Router } from "express";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.itemsRouter = void 0;
+var express_1 = require("express");
 var product = [
     { id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614' },
     { id: 2, title: "Помпа", name: "dolz", partNumber: "F150" }
 ];
-export var itemsRouter = Router();
-itemsRouter.get('/', function (req, res) {
+exports.itemsRouter = (0, express_1.Router)();
+exports.itemsRouter.get('/', function (req, res) {
     res.status(200).send(product);
 });
-itemsRouter.get('/', function (req, res) {
+exports.itemsRouter.get('/', function (req, res) {
     if (req.query.name) {
         var searchName_1 = req.query.name.toString();
         res.send(product.filter(function (item) { return item.name.indexOf(searchName_1) > -1; }));
@@ -16,7 +19,7 @@ itemsRouter.get('/', function (req, res) {
         res.send(product);
     }
 });
-itemsRouter.get('/:id', function (req, res) {
+exports.itemsRouter.get('/:id', function (req, res) {
     var itemId = product.find(function (f) { return f.id === +req.params.id; });
     if (itemId) {
         res.send(itemId);
@@ -25,7 +28,7 @@ itemsRouter.get('/:id', function (req, res) {
         res.send(404);
     }
 });
-itemsRouter.delete('/:id', function (req, res) {
+exports.itemsRouter.delete('/:id', function (req, res) {
     for (var i = 0; i < product.length; i += 1) {
         if (product[i].id === +req.params.id) {
             product.splice(i, 1);
@@ -35,7 +38,7 @@ itemsRouter.delete('/:id', function (req, res) {
     }
     res.send(404);
 });
-itemsRouter.post('/', function (req, res) {
+exports.itemsRouter.post('/', function (req, res) {
     var newItem = {
         id: +(new Date()),
         title: req.body.title,
@@ -45,7 +48,7 @@ itemsRouter.post('/', function (req, res) {
     product.push(newItem);
     res.status(201).send(newItem);
 });
-itemsRouter.put('/:id', function (req, res) {
+exports.itemsRouter.put('/:id', function (req, res) {
     var itemId = product.find(function (f) { return f.id === +req.params.id; });
     if (itemId) {
         itemId.partNumber = req.body.partNumber;
