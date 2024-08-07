@@ -6,9 +6,9 @@ const product = [
 ]
 export const itemsRouter = Router()
 
-itemsRouter.get('/', (req, res) => {
-    res.status(200).send(product)
-})
+// itemsRouter.get('/', (req, res) => {
+//     res.status(200).send(product)
+// })
 itemsRouter.get('/', (req, res) => {
     if (req.query.name) {
         let searchName = req.query.name.toString()

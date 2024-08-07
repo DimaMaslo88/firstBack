@@ -7,9 +7,9 @@ var product = [
     { id: 2, title: "Помпа", name: "dolz", partNumber: "F150" }
 ];
 exports.itemsRouter = (0, express_1.Router)();
-exports.itemsRouter.get('/', function (req, res) {
-    res.status(200).send(product);
-});
+// itemsRouter.get('/', (req, res) => {
+//     res.status(200).send(product)
+// })
 exports.itemsRouter.get('/', function (req, res) {
     if (req.query.name) {
         var searchName_1 = req.query.name.toString();
