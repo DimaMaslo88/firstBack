@@ -18,3 +18,12 @@ exports.carsRouter.get('/', function (req, res) {
         res.send(cars);
     }
 });
+exports.carsRouter.get('/:id', function (req, res) {
+    var carId = cars.find(function (car) { return car.id === +req.params.id; });
+    if (carId) {
+        res.send(cars);
+    }
+    else {
+        res.send(404);
+    }
+});

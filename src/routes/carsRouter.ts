@@ -18,4 +18,11 @@ carsRouter.get('/',(req,res)=>{
        res.send(cars)
    }
 })
-
+carsRouter.get('/:id',(req,res)=>{
+    let carId = cars.find(car=>car.id === +req.params.id)
+    if(carId){
+        res.send(cars)
+    }else{
+        res.send(404)
+    }
+})
