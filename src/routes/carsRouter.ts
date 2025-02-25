@@ -1,9 +1,8 @@
 import {Router} from 'express'
+import {carsRepositories} from "../repositories/carsRepositories";
 
 
-const cars = [
-    {id: 1, car: 'Ford', model: 'Explorer', generation: 5, year: 2017}
-]
+
 
 export const carsRouter = Router()
 
@@ -11,17 +10,13 @@ export const carsRouter = Router()
 //     res.status(200).send(cars)
 // })
 carsRouter.get('/',(req,res)=>{
-   if(req.query.car){
-       let searchingCar = req.query.car.toString()
-       res.send(cars.filter(f=>f.car.indexOf(searchingCar)))
-   }else{
-       res.send(cars)
-   }
+   const foundCars = carsRepositories.findCars(req.query.title?.toString())
+    res.send(foundCars)
 })
 carsRouter.get('/:id',(req,res)=>{
-    let carId = cars.find(car=>car.id === +req.params.id)
-    if(carId){
-        res.send(cars)
+const car = carsRepositories.getCarById(+req.query.id)
+    if(car){
+        res.send(car)
     }else{
         res.send(404)
     }
