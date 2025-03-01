@@ -14,10 +14,14 @@ carsRouter.get('/',(req,res)=>{
     res.send(foundCars)
 })
 carsRouter.get('/:id',(req,res)=>{
-const car = carsRepositories.getCarById(+req.query.id)
-    if(car){
-        res.send(car)
-    }else{
-        res.send(404)
+    if(req.query.id){
+        const car = carsRepositories.getCarById(+req.query.id)
+        if(car){
+            res.send(car)
+        }else{
+            res.send(404)
+        }
     }
+
+
 })

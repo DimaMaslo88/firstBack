@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.itemsRouter = void 0;
 var express_1 = require("express");
-var product = [
-    { id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614' },
-    { id: 2, title: "Помпа", name: "dolz", partNumber: "F150" }
-];
+// const product = [
+//     {id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614'},
+//     {id: 2, title: "Помпа", name: "dolz", partNumber: "F150"}
+// ] перенесоно в itemsRepositories
 exports.itemsRouter = (0, express_1.Router)();
 // itemsRouter.get('/', (req, res) => {
 //     res.status(200).send(product)

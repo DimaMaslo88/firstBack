@@ -1,9 +1,9 @@
 import {Router} from "express";
 
-const product = [
-    {id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614'},
-    {id: 2, title: "Помпа", name: "dolz", partNumber: "F150"}
-]
+// const product = [
+//     {id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614'},
+//     {id: 2, title: "Помпа", name: "dolz", partNumber: "F150"}
+// ] перенесоно в itemsRepositories
 export const itemsRouter = Router()
 
 // itemsRouter.get('/', (req, res) => {

@@ -13,11 +13,13 @@ exports.carsRouter.get('/', function (req, res) {
     res.send(foundCars);
 });
 exports.carsRouter.get('/:id', function (req, res) {
-    var car = carsRepositories_1.carsRepositories.getCarById(+req.query.id);
-    if (car) {
-        res.send(car);
-    }
-    else {
-        res.send(404);
+    if (req.query.id) {
+        var car = carsRepositories_1.carsRepositories.getCarById(+req.query.id);
+        if (car) {
+            res.send(car);
+        }
+        else {
+            res.send(404);
+        }
     }
 });
