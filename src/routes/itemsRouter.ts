@@ -11,7 +11,7 @@ export const itemsRouter = Router()
 //     res.status(200).send(product)
 // })
 itemsRouter.get('/', (req, res) => {
-   const getAllProducts = itemsRepositories.getProducts(req.query.name)
+    const getAllProducts = itemsRepositories.getProducts(req.query.name)
     res.send(getAllProducts)
 })
 itemsRouter.get('/:id', (req, res) => {
@@ -25,30 +25,26 @@ itemsRouter.get('/:id', (req, res) => {
 })
 itemsRouter.delete('/:id', (req, res) => {
     const deleteProduct = itemsRepositories.deleteProduct(req.query.id)
-    if(deleteProduct){
+    if (deleteProduct) {
         res.send(202)
-    }else {
+    } else {
         res.send(404)
     }
 
 })
 itemsRouter.post('/', (req, res) => {
-    const newItem = {
-        id: +(new Date()),
-        title: req.body.title,
-        name: req.body.name,
-        partNumber: req.body.partNumber
+    const createNewProduct = itemsRepositories.createProduct(req.query.title, req.query.name, req.query.partNumber)
+    if (createNewProduct) {
+        res.status(201).send(createNewProduct)
+    } else {
+        res.status(404)
     }
-    product.push(newItem)
-    res.status(201).send(newItem)
+
 })
 itemsRouter.put('/:id', (req, res) => {
-    let itemId = product.find(f => f.id === +req.params.id)
-    if (itemId) {
-        itemId.partNumber = req.body.partNumber
-        itemId.title = req.body.title
-        itemId.name = req.body.name
-        res.send(itemId)
+    const itemUpdate = itemsRepositories.updateProduct(req.query.id, req.query.title, req.query.name, req.query.partNumber)
+    if (itemUpdate) {
+        res.status(201).send(itemUpdate)
     } else {
         res.send(404)
     }

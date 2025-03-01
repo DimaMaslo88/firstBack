@@ -34,22 +34,18 @@ exports.itemsRouter.delete('/:id', function (req, res) {
     }
 });
 exports.itemsRouter.post('/', function (req, res) {
-    var newItem = {
-        id: +(new Date()),
-        title: req.body.title,
-        name: req.body.name,
-        partNumber: req.body.partNumber
-    };
-    product.push(newItem);
-    res.status(201).send(newItem);
+    var createNewProduct = itemsRepositories_1.itemsRepositories.createProduct(req.query.title, req.query.name, req.query.partNumber);
+    if (createNewProduct) {
+        res.status(201).send(createNewProduct);
+    }
+    else {
+        res.status(404);
+    }
 });
 exports.itemsRouter.put('/:id', function (req, res) {
-    var itemId = product.find(function (f) { return f.id === +req.params.id; });
-    if (itemId) {
-        itemId.partNumber = req.body.partNumber;
-        itemId.title = req.body.title;
-        itemId.name = req.body.name;
-        res.send(itemId);
+    var itemUpdate = itemsRepositories_1.itemsRepositories.updateProduct(req.query.id, req.query.title, req.query.name, req.query.partNumber);
+    if (itemUpdate) {
+        res.status(201).send(itemUpdate);
     }
     else {
         res.send(404);

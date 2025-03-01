@@ -36,5 +36,26 @@ exports.itemsRepositories = {
                     return false;
             }
         }
+    },
+    createProduct: function (title, name, partNumber) {
+        var newItem = {
+            id: +(new Date()),
+            title: title,
+            name: name,
+            partNumber: partNumber
+        };
+        product.push(newItem);
+        return newItem;
+    },
+    updateProduct: function (id, title, name, partNumber) {
+        var productId = product.find(function (prod) { return prod.id === id; });
+        if (productId) {
+            productId.title = title;
+            productId.name = name;
+            productId.partNumber = partNumber;
+            return true;
+        }
+        else
+            return false;
     }
 };

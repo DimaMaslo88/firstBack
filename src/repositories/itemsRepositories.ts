@@ -33,5 +33,25 @@ export const itemsRepositories = {
 
             }
         }
+    },
+    createProduct(title: string, name: string, partNumber: string) {
+        const newItem = {
+            id: +(new Date()),
+            title: title,
+            name: name,
+            partNumber: partNumber
+        }
+        product.push(newItem)
+        return newItem
+    },
+    updateProduct(id: number, title: string, name: string, partNumber: string) {
+        const productId = product.find(prod => prod.id === id)
+        if (productId) {
+            productId.title = title
+            productId.name = name
+            productId.partNumber = partNumber
+            return true
+        } else return false
+
     }
 }
