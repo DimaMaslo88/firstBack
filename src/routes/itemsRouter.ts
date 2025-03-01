@@ -11,25 +11,34 @@ export const itemsRouter = Router()
 //     res.status(200).send(product)
 // })
 itemsRouter.get('/', (req, res) => {
-    const getAllProducts = itemsRepositories.getProducts(req.query.name)
-    res.send(getAllProducts)
-})
-itemsRouter.get('/:id', (req, res) => {
-    const itemById = itemsRepositories.getProductById(req.query.id)
-    if (itemById) {
-        res.send(itemById)
-    } else {
-        res.send(404)
+    if(req.query.name){
+        const getAllProducts = itemsRepositories.getProducts(req.query.name)
+        res.send(getAllProducts)
     }
 
 })
-itemsRouter.delete('/:id', (req, res) => {
-    const deleteProduct = itemsRepositories.deleteProduct(req.query.id)
-    if (deleteProduct) {
-        res.send(202)
-    } else {
-        res.send(404)
+itemsRouter.get('/:id', (req, res) => {
+    if(req.query.id){
+        const itemById = itemsRepositories.getProductById(req.query.id)
+        if (itemById) {
+            res.send(itemById)
+        } else {
+            res.send(404)
+        }
     }
+
+
+})
+itemsRouter.delete('/:id', (req, res) => {
+    if(req.query.id){
+        const deleteProduct = itemsRepositories.deleteProduct(req.query.id)
+        if (deleteProduct) {
+            res.send(202)
+        } else {
+            res.send(404)
+        }
+    }
+
 
 })
 itemsRouter.post('/', (req, res) => {

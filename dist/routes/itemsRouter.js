@@ -12,25 +12,31 @@ exports.itemsRouter = (0, express_1.Router)();
 //     res.status(200).send(product)
 // })
 exports.itemsRouter.get('/', function (req, res) {
-    var getAllProducts = itemsRepositories_1.itemsRepositories.getProducts(req.query.name);
-    res.send(getAllProducts);
+    if (req.query.name) {
+        var getAllProducts = itemsRepositories_1.itemsRepositories.getProducts(req.query.name);
+        res.send(getAllProducts);
+    }
 });
 exports.itemsRouter.get('/:id', function (req, res) {
-    var itemById = itemsRepositories_1.itemsRepositories.getProductById(req.query.id);
-    if (itemById) {
-        res.send(itemById);
-    }
-    else {
-        res.send(404);
+    if (req.query.id) {
+        var itemById = itemsRepositories_1.itemsRepositories.getProductById(req.query.id);
+        if (itemById) {
+            res.send(itemById);
+        }
+        else {
+            res.send(404);
+        }
     }
 });
 exports.itemsRouter.delete('/:id', function (req, res) {
-    var deleteProduct = itemsRepositories_1.itemsRepositories.deleteProduct(req.query.id);
-    if (deleteProduct) {
-        res.send(202);
-    }
-    else {
-        res.send(404);
+    if (req.query.id) {
+        var deleteProduct = itemsRepositories_1.itemsRepositories.deleteProduct(req.query.id);
+        if (deleteProduct) {
+            res.send(202);
+        }
+        else {
+            res.send(404);
+        }
     }
 });
 exports.itemsRouter.post('/', function (req, res) {
