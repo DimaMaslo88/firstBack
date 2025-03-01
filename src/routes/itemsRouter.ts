@@ -1,4 +1,5 @@
 import {Router} from "express";
+import {itemsRepositories} from "../repositories/itemsRepositories";
 
 // const product = [
 //     {id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614'},
@@ -10,12 +11,8 @@ export const itemsRouter = Router()
 //     res.status(200).send(product)
 // })
 itemsRouter.get('/', (req, res) => {
-    if (req.query.name) {
-        let searchName = req.query.name.toString()
-        res.send(product.filter(item => item.name.indexOf(searchName) > -1))
-    } else {
-        res.send(product)
-    }
+   const getAllProducts = itemsRepositories.getProducts(req.query.name)
+    res.send(getAllProducts)
 })
 itemsRouter.get('/:id', (req, res) => {
     let itemId = product.find(f => f.id === +req.params.id)

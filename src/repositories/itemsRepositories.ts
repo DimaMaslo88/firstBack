@@ -12,5 +12,8 @@ export const itemsRepositories ={
         }else{
             return product
         }
+    },
+    getProductById(id:number){
+
     }
 }
