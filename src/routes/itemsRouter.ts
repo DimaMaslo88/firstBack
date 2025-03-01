@@ -15,9 +15,9 @@ itemsRouter.get('/', (req, res) => {
     res.send(getAllProducts)
 })
 itemsRouter.get('/:id', (req, res) => {
-    let itemId = product.find(f => f.id === +req.params.id)
-    if (itemId) {
-        res.send(itemId)
+    const itemById = itemsRepositories.getProductById(req.query.id)
+    if (itemById) {
+        res.send(itemById)
     } else {
         res.send(404)
     }

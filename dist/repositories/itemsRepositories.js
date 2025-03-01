@@ -15,5 +15,14 @@ exports.itemsRepositories = {
         else {
             return product;
         }
+    },
+    getProductById: function (id) {
+        if (id) {
+            var itemId = product.find(function (f) { return f.id === id; });
+            return itemId;
+        }
+        else {
+            return product;
+        }
     }
 };

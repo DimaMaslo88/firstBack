@@ -14,6 +14,13 @@ export const itemsRepositories ={
         }
     },
     getProductById(id:number){
+        if(id){
+            const itemId = product.find(f => f.id === id)
+            return itemId
+        }else{
+            return product
+        }
+
 
     }
 }

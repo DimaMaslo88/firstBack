@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.itemsRouter = void 0;
 var express_1 = require("express");
+var itemsRepositories_1 = require("../repositories/itemsRepositories");
 // const product = [
 //     {id: 1, title: "Маслянный фильтр", name: "dynamatrix", partNumber: 'DOFC614'},
 //     {id: 2, title: "Помпа", name: "dolz", partNumber: "F150"}
@@ -11,18 +12,13 @@ exports.itemsRouter = (0, express_1.Router)();
 //     res.status(200).send(product)
 // })
 exports.itemsRouter.get('/', function (req, res) {
-    if (req.query.name) {
-        var searchName_1 = req.query.name.toString();
-        res.send(product.filter(function (item) { return item.name.indexOf(searchName_1) > -1; }));
-    }
-    else {
-        res.send(product);
-    }
+    var getAllProducts = itemsRepositories_1.itemsRepositories.getProducts(req.query.name);
+    res.send(getAllProducts);
 });
 exports.itemsRouter.get('/:id', function (req, res) {
-    var itemId = product.find(function (f) { return f.id === +req.params.id; });
-    if (itemId) {
-        res.send(itemId);
+    var itemById = itemsRepositories_1.itemsRepositories.getProductById(req.query.id);
+    if (itemById) {
+        res.send(itemById);
     }
     else {
         res.send(404);
