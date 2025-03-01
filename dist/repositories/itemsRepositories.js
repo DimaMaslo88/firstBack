@@ -24,5 +24,17 @@ exports.itemsRepositories = {
         else {
             return product;
         }
+    },
+    deleteProduct: function (id) {
+        if (id) {
+            for (var i = 0; i < product.length; i += 1) {
+                if (product[i].id === id) {
+                    product.splice(i, 1);
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
     }
 };

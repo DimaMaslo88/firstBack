@@ -25,14 +25,13 @@ exports.itemsRouter.get('/:id', function (req, res) {
     }
 });
 exports.itemsRouter.delete('/:id', function (req, res) {
-    for (var i = 0; i < product.length; i += 1) {
-        if (product[i].id === +req.params.id) {
-            product.splice(i, 1);
-            res.send(202);
-            return;
-        }
+    var deleteProduct = itemsRepositories_1.itemsRepositories.deleteProduct(req.query.id);
+    if (deleteProduct) {
+        res.send(202);
     }
-    res.send(404);
+    else {
+        res.send(404);
+    }
 });
 exports.itemsRouter.post('/', function (req, res) {
     var newItem = {

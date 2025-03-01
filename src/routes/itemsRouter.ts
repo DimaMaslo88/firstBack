@@ -24,15 +24,13 @@ itemsRouter.get('/:id', (req, res) => {
 
 })
 itemsRouter.delete('/:id', (req, res) => {
-    for (let i = 0; i < product.length; i += 1) {
-        if (product[i].id === +req.params.id) {
-            product.splice(i, 1)
-            res.send(202)
-            return;
-        }
-
+    const deleteProduct = itemsRepositories.deleteProduct(req.query.id)
+    if(deleteProduct){
+        res.send(202)
+    }else {
+        res.send(404)
     }
-    res.send(404)
+
 })
 itemsRouter.post('/', (req, res) => {
     const newItem = {
