@@ -12,14 +12,14 @@ export const itemsRouter = Router()
 // })
 itemsRouter.get('/', (req, res) => {
     if(req.query.name){
-        const getAllProducts = itemsRepositories.getProducts(req.query.name)
+        const getAllProducts = itemsRepositories.getProducts(req.query.name?.toString())
         res.send(getAllProducts)
     }
 
 })
 itemsRouter.get('/:id', (req, res) => {
     if(req.query.id){
-        const itemById = itemsRepositories.getProductById(req.query.id)
+        const itemById = itemsRepositories.getProductById(+req.query.id)
         if (itemById) {
             res.send(itemById)
         } else {
@@ -31,7 +31,7 @@ itemsRouter.get('/:id', (req, res) => {
 })
 itemsRouter.delete('/:id', (req, res) => {
     if(req.query.id){
-        const deleteProduct = itemsRepositories.deleteProduct(req.query.id)
+        const deleteProduct = itemsRepositories.deleteProduct(+req.query.id)
         if (deleteProduct) {
             res.send(202)
         } else {
@@ -42,20 +42,26 @@ itemsRouter.delete('/:id', (req, res) => {
 
 })
 itemsRouter.post('/', (req, res) => {
-    const createNewProduct = itemsRepositories.createProduct(req.query.title, req.query.name, req.query.partNumber)
-    if (createNewProduct) {
-        res.status(201).send(createNewProduct)
-    } else {
-        res.status(404)
-    }
+
+        const createNewProduct = itemsRepositories.createProduct(req.query.title, req.query.name, req.query.partNumber)
+        if (createNewProduct) {
+            res.status(201).send(createNewProduct)
+        } else {
+            res.status(404)
+        }
+
+
 
 })
 itemsRouter.put('/:id', (req, res) => {
-    const itemUpdate = itemsRepositories.updateProduct(req.query.id, req.query.title, req.query.name, req.query.partNumber)
-    if (itemUpdate) {
-        res.status(201).send(itemUpdate)
-    } else {
-        res.send(404)
+    if(req.query.id, req.query.title, req.query.name, req.query.partNumber){
+        const itemUpdate = itemsRepositories.updateProduct(+req.query.id, req.query.title, req.query.name, req.query.partNumber)
+        if (itemUpdate) {
+            res.status(201).send(itemUpdate)
+        } else {
+            res.send(404)
+        }
     }
+
 
 })

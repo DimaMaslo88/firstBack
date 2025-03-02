@@ -12,14 +12,15 @@ exports.itemsRouter = (0, express_1.Router)();
 //     res.status(200).send(product)
 // })
 exports.itemsRouter.get('/', function (req, res) {
+    var _a;
     if (req.query.name) {
-        var getAllProducts = itemsRepositories_1.itemsRepositories.getProducts(req.query.name);
+        var getAllProducts = itemsRepositories_1.itemsRepositories.getProducts((_a = req.query.name) === null || _a === void 0 ? void 0 : _a.toString());
         res.send(getAllProducts);
     }
 });
 exports.itemsRouter.get('/:id', function (req, res) {
     if (req.query.id) {
-        var itemById = itemsRepositories_1.itemsRepositories.getProductById(req.query.id);
+        var itemById = itemsRepositories_1.itemsRepositories.getProductById(+req.query.id);
         if (itemById) {
             res.send(itemById);
         }
@@ -30,7 +31,7 @@ exports.itemsRouter.get('/:id', function (req, res) {
 });
 exports.itemsRouter.delete('/:id', function (req, res) {
     if (req.query.id) {
-        var deleteProduct = itemsRepositories_1.itemsRepositories.deleteProduct(req.query.id);
+        var deleteProduct = itemsRepositories_1.itemsRepositories.deleteProduct(+req.query.id);
         if (deleteProduct) {
             res.send(202);
         }
@@ -49,11 +50,13 @@ exports.itemsRouter.post('/', function (req, res) {
     }
 });
 exports.itemsRouter.put('/:id', function (req, res) {
-    var itemUpdate = itemsRepositories_1.itemsRepositories.updateProduct(req.query.id, req.query.title, req.query.name, req.query.partNumber);
-    if (itemUpdate) {
-        res.status(201).send(itemUpdate);
-    }
-    else {
-        res.send(404);
+    if (req.query.id, req.query.title, req.query.name, req.query.partNumber) {
+        var itemUpdate = itemsRepositories_1.itemsRepositories.updateProduct(+req.query.id, req.query.title, req.query.name, req.query.partNumber);
+        if (itemUpdate) {
+            res.status(201).send(itemUpdate);
+        }
+        else {
+            res.send(404);
+        }
     }
 });
