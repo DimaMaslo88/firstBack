@@ -41,17 +41,20 @@ exports.itemsRouter.delete('/:id', function (req, res) {
     }
 });
 exports.itemsRouter.post('/', function (req, res) {
-    var createNewProduct = itemsRepositories_1.itemsRepositories.createProduct(req.query.title, req.query.name, req.query.partNumber);
-    if (createNewProduct) {
-        res.status(201).send(createNewProduct);
-    }
-    else {
-        res.status(404);
+    if (req.query.title && req.query.name && req.query.partNumber) {
+        var createNewProduct = itemsRepositories_1.itemsRepositories.createProduct(req.query.title.toString(), req.query.name.toString(), req.query.partNumber.toString());
+        if (createNewProduct) {
+            res.status(201).send(createNewProduct);
+        }
+        else {
+            res.status(404);
+        }
     }
 });
 exports.itemsRouter.put('/:id', function (req, res) {
-    if (req.query.id, req.query.title, req.query.name, req.query.partNumber) {
-        var itemUpdate = itemsRepositories_1.itemsRepositories.updateProduct(+req.query.id, req.query.title, req.query.name, req.query.partNumber);
+    if (req.query.id && req.query.title && req.query.name && req.query.partNumber) {
+        var itemUpdate = itemsRepositories_1.itemsRepositories.
+            updateProduct(+req.query.id, req.query.title.toString(), req.query.name.toString(), req.query.partNumber.toString());
         if (itemUpdate) {
             res.status(201).send(itemUpdate);
         }

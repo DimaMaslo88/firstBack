@@ -11,14 +11,14 @@ export const itemsRouter = Router()
 //     res.status(200).send(product)
 // })
 itemsRouter.get('/', (req, res) => {
-    if(req.query.name){
+    if (req.query.name) {
         const getAllProducts = itemsRepositories.getProducts(req.query.name?.toString())
         res.send(getAllProducts)
     }
 
 })
 itemsRouter.get('/:id', (req, res) => {
-    if(req.query.id){
+    if (req.query.id) {
         const itemById = itemsRepositories.getProductById(+req.query.id)
         if (itemById) {
             res.send(itemById)
@@ -30,7 +30,7 @@ itemsRouter.get('/:id', (req, res) => {
 
 })
 itemsRouter.delete('/:id', (req, res) => {
-    if(req.query.id){
+    if (req.query.id) {
         const deleteProduct = itemsRepositories.deleteProduct(+req.query.id)
         if (deleteProduct) {
             res.send(202)
@@ -42,26 +42,27 @@ itemsRouter.delete('/:id', (req, res) => {
 
 })
 itemsRouter.post('/', (req, res) => {
-
-        const createNewProduct = itemsRepositories.createProduct(req.query.title, req.query.name, req.query.partNumber)
+    if (req.query.title && req.query.name && req.query.partNumber) {
+        const createNewProduct = itemsRepositories.createProduct(req.query.title.toString(), req.query.name.toString(), req.query.partNumber.toString())
         if (createNewProduct) {
             res.status(201).send(createNewProduct)
         } else {
             res.status(404)
         }
-
-
+    }
 
 })
 itemsRouter.put('/:id', (req, res) => {
-    if(req.query.id, req.query.title, req.query.name, req.query.partNumber){
-        const itemUpdate = itemsRepositories.updateProduct(+req.query.id, req.query.title, req.query.name, req.query.partNumber)
+    if (req.query.id && req.query.title && req.query.name && req.query.partNumber){
+        const itemUpdate = itemsRepositories.
+        updateProduct(+req.query.id, req.query.title.toString(), req.query.name.toString(), req.query.partNumber.toString())
         if (itemUpdate) {
             res.status(201).send(itemUpdate)
         } else {
             res.send(404)
         }
     }
+
 
 
 })
